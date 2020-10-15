@@ -23,6 +23,7 @@ environment:
 dependencies:
   wakelock: ^0.2.0+1
   http: any
+  flare_flutter: ^2.0.6
   flutter:
     sdk: flutter
 

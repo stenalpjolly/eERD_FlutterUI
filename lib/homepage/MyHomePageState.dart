@@ -1,26 +1,33 @@
+import 'package:erdk_enhance/device/DeviceInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:wakelock/wakelock.dart';
-
 import '../main.dart';
 
 class MyHomePageState extends State<MyHomePage> {
+
+
+  @override
+  void initState() {
+    super.initState();
+    if(this.widget.deviceInfo == null) {
+      this.widget.deviceInfo = new DeviceInfo(this);
+      this.widget.deviceInfo.updateDeviceName();
+    }
+  }
 
   @override
   void setState(fn) {
     // TODO: implement setState
     Wakelock.enable();
     super.setState(fn);
-    print('Enabled');
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    if(this.widget.deviceInfo == null) {
+      this.widget.deviceInfo = new DeviceInfo(this);
+      this.widget.deviceInfo.updateDeviceName();
+    }
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -39,16 +46,39 @@ class MyHomePageState extends State<MyHomePage> {
                     widget.isConnected = !widget.isConnected;
                   });
 
-                  // final Future<http.Response> response = http.get(
-                  //   'http://tr1d1um.rdkcloud.com:8080/api/v2/device/mac:b827eb68d548/config?names=Device.DeviceInfo.Manufacturer',
-                  //   headers: <String, String>{
-                  //     'Authorization': 'Basic dXNlcjpwYXNz',
-                  //   },
-                  // );
-                  // response.then((response) => {print(response.body)});
+
                 },
                 child: ButtonLabel(widget: widget),
-              ))
+              )),
+          Align(
+            alignment: Alignment(0.0,0.7),
+            child: Container(
+              height: 40,
+              width: 250,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(40)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.4),
+                    spreadRadius: 2,
+                    blurRadius: 15,
+                    offset: Offset(2, 2), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Container(
+                height: 150,
+                width: 150,
+                decoration: BoxDecoration(
+                  color: Colors.white70,
+                  borderRadius: BorderRadius.all(Radius.circular(150)),
+                ),
+                child:Center(
+                  child:Text(widget.deviceInfo != null ? widget.deviceInfo.deviceName : "")
+                )
+              ),
+            ),
+          )
         ]) /* add child content here */,
       ),
     );

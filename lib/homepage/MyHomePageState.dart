@@ -177,12 +177,14 @@ class CurrentConnectionStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment(0.0, -0.45),
-      child: Text(
-        widget.infoDataList[widget.isConnected ? 0 : 1].topTitle,
+      child: AnimatedDefaultTextStyle(
+        duration: const Duration(milliseconds: 200),
         style: TextStyle(
-            color: widget.infoDataList[widget.isConnected ? 0 : 1].topTitleColor,//Colors.pinkAccent,
-            fontSize: 25,
-            fontWeight: FontWeight.bold),
+          fontSize: widget.isConnected ? 30 : 25 ,
+          color: widget.infoDataList[widget.isConnected ? 0 : 1].topTitleColor,
+          fontWeight: FontWeight.bold,
+        ),
+        child: Text(widget.infoDataList[widget.isConnected ? 0 : 1].topTitle),
       ),
     );
   }

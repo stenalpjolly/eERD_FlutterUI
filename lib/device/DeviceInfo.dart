@@ -19,4 +19,12 @@ class DeviceInfo {
       });
     });
   }
+
+  getDeviceName(){
+    if(this.deviceName == "") {
+      return this.mac;
+    }
+    return this.deviceName + " .. " + this.mac.substring(this.mac.length - 5);
+  }
+
 }

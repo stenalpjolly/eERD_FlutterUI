@@ -54,7 +54,7 @@ class MyHomePageState extends State<MyHomePage> {
             alignment: Alignment(0.0,0.7),
             child: Container(
               height: 40,
-              width: 250,
+              width: 270,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(40)),
                 boxShadow: [
@@ -74,7 +74,7 @@ class MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.all(Radius.circular(150)),
                 ),
                 child:Center(
-                  child:Text(widget.deviceInfo != null ? widget.deviceInfo.deviceName : "")
+                  child:Text(widget.deviceInfo != null ? widget.deviceInfo.getDeviceName() : "")
                 )
               ),
             ),
